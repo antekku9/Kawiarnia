@@ -71,26 +71,20 @@ export function Header({ onCartClick, cartItemCount, onLogoClick }: HeaderProps)
           </div>
 
           <div className="flex items-center gap-1">
-            <button className="p-2.5 hover:bg-white/10 rounded-lg transition-colors">
-              <Heart className="h-5 w-5 text-white" />
-            </button>
-
-            <button
-              className="p-2.5 hover:bg-white/10 rounded-lg transition-colors relative"
-              onClick={onCartClick}
-            >
-              <ShoppingBag className="h-5 w-5 text-white" />
-
-              {cartItemCount > 0 && (
-                <span className="absolute -top-1 -right-1 bg-white text-primary text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
-                  {cartItemCount}
-                </span>
-              )}
-            </button>
-
-            <button className="p-2.5 hover:bg-white/10 rounded-lg transition-colors">
-              <User className="h-5 w-5 text-white" />
-            </button>
+<button
+  onClick={onLogoClick}
+  className="flex items-center gap-3 hover:opacity-90 transition-opacity"
+>
+  <img
+    src={logoUrl}
+    alt="Beans Coffee"
+    className="h-14 w-auto object-contain"
+  />
+  <div>
+    <h1 className="font-['Baguet_Script',cursive] text-2xl text-white leading-tight">Beans</h1>
+    <p className="text-sm text-white/90 leading-tight">Coffee</p>
+  </div>
+</button>
           </div>
 
         </div>
