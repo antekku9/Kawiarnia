@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { ArrowLeft, CreditCard, MapPin, PackageCheck, ShoppingBag } from 'lucide-react';
 
 interface CartItem {
@@ -14,9 +15,24 @@ interface CheckoutPageProps {
   onNavigateShop: () => void;
 }
 
+const deliveryOptions = [
+  { id: 'pickup', label: 'Odbiór w kawiarni', price: 0 },
+  { id: 'courier', label: 'Kurier miejski', price: 12.99 },
+  { id: 'locker', label: 'Paczkomat', price: 14.99 },
+];
+
+const paymentOptions = [
+  { id: 'blik', label: 'BLIK / szybki przelew' },
+  { id: 'card', label: 'Karta online' },
+  { id: 'cod', label: 'Płatność przy odbiorze' },
+];
+
 export function CheckoutPage({ items, onBack, onNavigateShop }: CheckoutPageProps) {
+  const [selectedDelivery, setSelectedDelivery] = useState(deliveryOptions[0].id);
+  const [selectedPayment, setSelectedPayment] = useState(paymentOptions[0].id);
+
   const productsTotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const delivery = productsTotal >= 80 || productsTotal === 0 ? 0 : 12.99;
+  const delivery = deliveryOptions.find((option) => option.id === selectedDelivery)?.price ?? 0;
   const total = productsTotal + delivery;
 
   if (items.length === 0) {
@@ -64,12 +80,31 @@ export function CheckoutPage({ items, onBack, onNavigateShop }: CheckoutPageProp
                 <h2 className="text-xl">Dostawa</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {['Odbiór w kawiarni', 'Kurier miejski', 'Paczkomat'].map((option, index) => (
-                  <label key={option} className={`border rounded-xl p-4 cursor-pointer ${index === 0 ? 'border-[#7A6343] bg-[#7A6343]/5' : 'border-gray-200'}`}>
-                    <input type="radio" name="delivery" defaultChecked={index === 0} className="mr-2" />
-                    {option}
-                  </label>
-                ))}
+                {deliveryOptions.map((option) => {
+                  const isSelected = selectedDelivery === option.id;
+                  return (
+                    <label
+                      key={option.id}
+                      className={`border rounded-xl p-4 cursor-pointer transition-all ${
+                        isSelected
+                          ? 'border-[#7A6343] bg-[#7A6343]/10 shadow-sm ring-1 ring-[#7A6343]'
+                          : 'border-gray-200 bg-white hover:bg-[#7A6343]/5'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="delivery"
+                        checked={isSelected}
+                        onChange={() => setSelectedDelivery(option.id)}
+                        className="mr-2"
+                      />
+                      <span className="font-medium">{option.label}</span>
+                      <span className="block pl-6 text-xs text-muted-foreground mt-1">
+                        {option.price === 0 ? '0 zł' : `${option.price.toFixed(2)} zł`}
+                      </span>
+                    </label>
+                  );
+                })}
               </div>
             </section>
 
@@ -79,12 +114,28 @@ export function CheckoutPage({ items, onBack, onNavigateShop }: CheckoutPageProp
                 <h2 className="text-xl">Płatność</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                {['BLIK / szybki przelew', 'Karta online', 'Płatność przy odbiorze'].map((option, index) => (
-                  <label key={option} className={`border rounded-xl p-4 cursor-pointer ${index === 0 ? 'border-[#7A6343] bg-[#7A6343]/5' : 'border-gray-200'}`}>
-                    <input type="radio" name="payment" defaultChecked={index === 0} className="mr-2" />
-                    {option}
-                  </label>
-                ))}
+                {paymentOptions.map((option) => {
+                  const isSelected = selectedPayment === option.id;
+                  return (
+                    <label
+                      key={option.id}
+                      className={`border rounded-xl p-4 cursor-pointer transition-all ${
+                        isSelected
+                          ? 'border-[#7A6343] bg-[#7A6343]/10 shadow-sm ring-1 ring-[#7A6343]'
+                          : 'border-gray-200 bg-white hover:bg-[#7A6343]/5'
+                      }`}
+                    >
+                      <input
+                        type="radio"
+                        name="payment"
+                        checked={isSelected}
+                        onChange={() => setSelectedPayment(option.id)}
+                        className="mr-2"
+                      />
+                      <span className="font-medium">{option.label}</span>
+                    </label>
+                  );
+                })}
               </div>
             </section>
           </div>

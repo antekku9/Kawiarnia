@@ -1,5 +1,5 @@
 import { Mail, Phone, Send, Instagram, MapPin, Clock } from 'lucide-react';
-import { CoffeeBeanIcon } from './SectionDivider';
+import logoUrl from '@/imports/Nowe_logo_14.png';
 import { useState } from 'react';
 
 interface FooterProps {
@@ -100,9 +100,11 @@ export function Footer({ onNavigate }: FooterProps) {
 
           <div className="flex justify-center md:justify-end items-start">
             <div className="rounded-2xl border border-white/20 bg-white/10 p-5 text-center max-w-[220px]">
-              <div className="mx-auto mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-white text-[#7A6343]">
-                <CoffeeBeanIcon className="h-10 w-10" />
-              </div>
+              <img
+                src={logoUrl}
+                alt="Beans Coffee"
+                className="mx-auto mb-3 h-24 w-24 object-contain"
+              />
               <p className="font-['Baguet_Script',cursive] text-3xl leading-none">Beans</p>
               <p className="text-sm uppercase tracking-[0.25em] text-white/80">Coffee</p>
               <div className="mt-4 space-y-2 text-xs text-white/85">

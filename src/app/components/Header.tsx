@@ -28,7 +28,7 @@ export function Header({ onCartClick, cartItemCount, onLogoClick }: HeaderProps)
             <img
               src={logoUrl}
               alt="Beans Coffee"
-              className="h-12 w-12 object-contain bg-white rounded-full p-1"
+              className="h-12 w-12 object-contain"
             />
             <div>
               <h1 className="font-['Baguet_Script',cursive] text-2xl text-white leading-tight">Beans</h1>
