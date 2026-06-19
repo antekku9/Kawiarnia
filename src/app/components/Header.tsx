@@ -1,6 +1,6 @@
 import { Search, Heart, ShoppingBag, User } from 'lucide-react';
 import { useState } from 'react';
-import logoUrl from '@/imports/Nowe_logo_14.png';
+import logoUrl from '@/imports/Nowe_logo_15.png';
 
 interface HeaderProps {
   onCartClick: () => void;
