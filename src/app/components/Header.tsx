@@ -17,7 +17,7 @@ export function Header({ onCartClick, cartItemCount, onLogoClick }: HeaderProps)
     'Croissant',
     'Ciasto czekoladowe',
     'Espresso',
-    'Ciastka owsiane'
+    'Ciastka owsiane',
   ];
 
   const filteredSuggestions = suggestions.filter(item =>
@@ -28,16 +28,21 @@ export function Header({ onCartClick, cartItemCount, onLogoClick }: HeaderProps)
     <header className="sticky top-0 z-50" style={{ backgroundColor: '#7A6343' }}>
       <div className="max-w-7xl mx-auto px-6 py-3">
         <div className="flex items-center justify-between gap-6">
-
           <button
             onClick={onLogoClick}
-            className="flex items-center hover:opacity-90 transition-opacity"
+            className="flex items-center gap-3 hover:opacity-90 transition-opacity shrink-0"
           >
             <img
               src={logoUrl}
               alt="Beans Coffee"
-              className="h-16 md:h-20 w-auto object-contain"
+              className="h-14 md:h-16 w-auto object-contain"
             />
+            <div>
+              <h1 className="font-['Baguet_Script',cursive] text-2xl text-white leading-tight">
+                Beans
+              </h1>
+              <p className="text-sm text-white/90 leading-tight">Coffee</p>
+            </div>
           </button>
 
           <div className="flex-1 max-w-xl relative">
@@ -70,23 +75,28 @@ export function Header({ onCartClick, cartItemCount, onLogoClick }: HeaderProps)
             )}
           </div>
 
-          <div className="flex items-center gap-1">
-<button
-  onClick={onLogoClick}
-  className="flex items-center gap-3 hover:opacity-90 transition-opacity"
->
-  <img
-    src={logoUrl}
-    alt="Beans Coffee"
-    className="h-14 w-auto object-contain"
-  />
-  <div>
-    <h1 className="font-['Baguet_Script',cursive] text-2xl text-white leading-tight">Beans</h1>
-    <p className="text-sm text-white/90 leading-tight">Coffee</p>
-  </div>
-</button>
-          </div>
+          <div className="flex items-center gap-1 shrink-0">
+            <button className="p-2.5 hover:bg-white/10 rounded-lg transition-colors">
+              <Heart className="h-5 w-5 text-white" />
+            </button>
 
+            <button
+              className="p-2.5 hover:bg-white/10 rounded-lg transition-colors relative"
+              onClick={onCartClick}
+            >
+              <ShoppingBag className="h-5 w-5 text-white" />
+
+              {cartItemCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-white text-primary text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                  {cartItemCount}
+                </span>
+              )}
+            </button>
+
+            <button className="p-2.5 hover:bg-white/10 rounded-lg transition-colors">
+              <User className="h-5 w-5 text-white" />
+            </button>
+          </div>
         </div>
       </div>
     </header>
